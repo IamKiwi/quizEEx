@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../../partials/main.xhtml">
+	<ui:define name="banner"></ui:define>
+	<ui:define name="content">
+		<div id="main">
+			<section>
+				<div class="inner">
+					<h3>#{dash.admindash}</h3>
+					<hr />
+					<div class="box alt">
+						<div class="row gtr-50 gtr-uniform">
+							<div class="col-6">
+								<span class="image fit"> 
+									<a href="users.xhtml" class="button icon large fit fa-user">#{dash.users}</a>
+								</span>
+							</div>
+							<div class="col-6">
+								<span class="image fit">
+									<a href="quizes.xhtml" class="button icon large fit fa-question">#{dash.quizzes}</a>
+								</span>
+							</div>
+							<div class="col-12">
+								<span class="image fit"> 
+									<h:form>
+									<h:commandButton class="button icon large fit fa-sign-out" 
+													 value="#{dash.logout}" action="#{loginBB.doLogout()}"/>
+									</h:form>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</ui:define>
+
+</ui:composition>
+</html>

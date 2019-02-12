@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../partials/main.xhtml">
+	<ui:define name="banner">
+
+	</ui:define>
+
+	<ui:define name="content">
+		<div id="main">
+			<section id="two">
+				<div class="inner">
+					<header class="major">
+						<h2>#{reg.register}</h2>
+					</header>
+					<p>#{reg.registerInfo}</p>
+				</div>
+			</section>
+			<section>
+				<div class="inner">
+					<section>
+						<h:messages id="msg" closable="true"/>
+						<h:form>
+							<div class="fields">
+								<div class="field half">
+									<label for="name">#{reg.name}</label>
+									<h:inputText id="name" required="true"
+										requiredMessage="#{reg.nameRequiredMessage}"
+										validatorMessage="#{reg.nameValidatorMessage}"
+										value="#{registerBB.user.name}">
+										<f:validateLength maximum="40" />
+									</h:inputText>
+								</div>
+								<div class="field half">
+									<label for="name">#{reg.surname}</label>
+									<h:inputText id="surname" required="true"
+										requiredMessage="#{reg.surnameRequiredMessage}"
+										validatorMessage="#{reg.surnameValidatorMessage}"
+										value="#{registerBB.user.surname}">
+										<f:validateLength maximum="40" />
+									</h:inputText>
+								</div>
+								<div class="field">
+									<label for="email">#{reg.email}</label> 
+									<h:inputText id="email" required="true"
+										requiredMessage="#{reg.emailRequiredMessage}"
+										validatorMessage="#{reg.emailValidatorMessage}"
+										value="#{registerBB.user.email}" >
+										<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+									</h:inputText>
+								</div>
+								<div class="field half">
+									<label for="password">#{reg.password}</label> 
+									<h:inputSecret id="password" required="true"
+										requiredMessage="#{reg.passwordRequiredMessage}"
+										validatorMessage="#{reg.passwordValidatorMessage}"
+										value="#{registerBB.user.password}">
+										<f:validateLength minimum="6" maximum="40" />
+									</h:inputSecret>
+								</div>
+								<div class="field half">
+									<label for="password_confirm">#{reg.passconfirm}</label> 
+									<h:inputSecret id="password_confirm" required="true"
+										requiredMessage="#{reg.passconfirmRequiredMessage}"
+										validatorMessage="#{reg.passconfirmValidatorMessage}"
+										value="#{registerBB.passConfirm}">
+										<f:validateLength maximum="40" />
+									</h:inputSecret>
+								</div>
+							</div>
+							<div class="field half">
+								<h:commandButton value="#{reg.register}" action="#{registerBB.saveData()}" update="msg" class="primary fit"/>
+							</div>
+						</h:form>
+					</section>
+				</div>
+			</section>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

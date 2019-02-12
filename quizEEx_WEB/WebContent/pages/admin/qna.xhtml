@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../../partials/main.xhtml">
+	<ui:define name="banner"></ui:define>
+	<ui:define name="content">
+		<div id="main">
+			<section>
+				<div class="inner">
+					<h3>#{adminquiz.addqinfo}</h3>
+					<div class="inner">
+						<hr />
+						<h:form id="form">
+							<p:growl id="msgs" showDetail="false" closeable="true"
+								life="2000" />
+							<div class="col-12">
+								<span class="image fit"> <a href="quizes.xhtml"
+									class="button icon fit primary fa-check">#{adminquiz.apply}</a>
+								</span>
+							</div>
+
+							<div class="table-wrapper">
+								<p:dataTable id="qnaw" var="q" rows="5"
+									value="#{questionBB.questions}" editable="true"
+									paginator="true" lazy="true"
+									paginatorTemplate="{CurrentPageReport} {PageLinks}"
+									rowsPerPageTemplate="5,10,15">
+
+									<p:ajax event="rowEdit" listener="#{questionBB.onRowEdit}"
+										update=":form:msgs qnaw" />
+									<p:ajax event="rowEditCancel"
+										listener="#{questionBB.onRowCancel}" update=":form:msgs qnaw" />
+
+									<p:column style="width:35px">
+										<p:rowEditor />
+									</p:column>
+
+									<p:column headerText="#{adminquiz.question}" style="width: 70%;">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{q.question}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="modelInput" value="#{q.question}"
+													style="width:96%" label="Pytanie" />
+											</f:facet>
+										</p:cellEditor>
+									</p:column>
+
+									<p:column>
+										<f:facet name="header">
+											<h:outputText value="#{adminquiz.answers}" />
+										</f:facet>
+										<p:commandButton value="#{adminquiz.answers}" class="button fit small"
+											action="#{answerBB.answers(q)}">
+											<f:param name="qid" value="#{question.id}"></f:param>
+										</p:commandButton>
+									</p:column>
+									<p:column>
+										<f:facet name="header">
+											<h:outputText value="#{adminquiz.delete}" />
+										</f:facet>
+										<p:commandButton value="#{adminquiz.delete}" class="button fit small"
+											action="#{questionBB.deleteQuestion(q)}"
+											update=":form:msgs qnaw" />
+									</p:column>
+								</p:dataTable>
+							</div>
+						</h:form>
+						<div class="inner">
+							<h:form style="margin-bottom:1em;">
+								<div class="fields">
+									<div class="field">
+										<label for="name">#{adminquiz.question}</label>
+										<h:inputText id="question" required="true"
+											requiredMessage="#{adminquiz.questionRequiredMessage}"
+											validatorMessage="#{adminquiz.questionValidatorMessage}"
+											value="#{questionBB.question.question}">
+											<f:validateLength maximum="255" />
+										</h:inputText>
+									</div>
+								</div>
+								<hr />
+								<div class="box alt">
+									<div class="row gtr-50 gtr-uniform">
+										<div class="col-12">
+											<p:commandButton value="#{adminquiz.add}" class="button fit primary"
+												update=":form:msgs form" action="#{questionBB.saveData()}">
+												<f:param name="qid" value="#{quiz.id}" />
+											</p:commandButton>
+										</div>
+									</div>
+								</div>
+							</h:form>
+						</div>
+						<hr />
+					</div>
+				</div>
+			</section>
+		</div>
+	</ui:define>
+
+</ui:composition>
+</html>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../../partials/main.xhtml">
+	<style type="text/css">
+.ui-row-editor .ui-row-editor-pencil {
+	margin-left: 8px;
+}
+</style>
+
+	<ui:define name="banner"></ui:define>
+	<ui:define name="content">
+		<div id="main">
+			<section>
+				<div class="inner">
+					<h3>#{adminquiz.addainfo}</h3>
+					<hr/>
+					
+					<h:form id="form">
+						<p:growl id="msgs" showDetail="false" closeable="true" life="2000" />
+						<div class="col-12">
+							<span class="image fit"> <a href="qna.xhtml"
+								class="button icon fit primary fa-check">#{adminquiz.apply}</a>
+							</span>
+						</div>
+						
+						<h3><h:outputText value="#{question.question}" /></h3>
+						
+						<p:dataTable id="answ" var="q" rows="5"
+							value="#{answerBB.answers}" editable="true" paginator="true"
+							lazy="true" paginatorTemplate="{CurrentPageReport} {PageLinks}"
+							rowsPerPageTemplate="5,10,15">
+
+							<p:ajax event="rowEdit" listener="#{answerBB.onRowEdit}"
+								update=":form:msgs answ" />
+							<p:ajax event="rowEditCancel" listener="#{answerBB.onRowCancel}"
+								update=":form:msgs answ" />
+
+							<p:column style="width:35px">
+								<p:rowEditor />
+							</p:column>
+
+							<p:column headerText="#{adminquiz.answer}" style="width: 60%;">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{q.answer}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{q.answer}" style="width:96%"
+											label="#{adminquiz.answer}" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="#{adminquiz.iscorrect}">
+								<h:outputText value="#{adminquiz.yes}" rendered="#{q.isCorrect}" />
+								<h:outputText value="#{adminquiz.no}" rendered="#{!q.isCorrect}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{adminquiz.correctness}" />
+								</f:facet>
+								<p:commandButton value="#{adminquiz.mark}" class="button fit small"
+									action="#{answerBB.changeToCorrect(q)}"
+									rendered="#{!q.isCorrect}" update=":form:msgs answ" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#{adminquiz.delete}" />
+								</f:facet>
+								<p:commandButton value="#{adminquiz.delete}" class="button fit small"
+									action="#{answerBB.deleteAnswer(q)}" update=":form:msgs answ" />
+							</p:column>
+						</p:dataTable>
+						
+						<div class="col-12" style="margin-top: 30px;">
+							<p:commandButton value="#{adminquiz.deleteAll}" class="button fit primary"
+								update=":form:msgs form"
+								action="#{answerBB.deleteAllAnswers(question.id)}" />
+						</div>
+					</h:form>
+
+					<h3>#{adminquiz.addainfo}</h3>
+					<div class="inner">
+						<h:form style="margin-bottom:1em;">
+							<div class="fields">
+								<div class="field half">
+									<label for="name">#{adminquiz.answer} 1</label>
+									<h:inputText id="answer1" required="true"
+										requiredMessage="#{adminquiz.answerRequiredMessage} 1"
+											validatorMessage="#{adminquiz.answerValidatorMessage}"
+										value="#{answerBB.answer.get(0).answer}">
+										<f:validateLength maximum="255" />
+									</h:inputText>
+								</div>
+								<div class="field half">
+									<label for="answer2">#{adminquiz.answer} 2</label>
+									<h:inputText id="answer2" required="true"
+										requiredMessage="#{adminquiz.answerRequiredMessage} 2"
+											validatorMessage="#{adminquiz.answerValidatorMessage}"
+										value="#{answerBB.answer.get(1).answer}">
+										<f:validateLength maximum="255" />
+									</h:inputText>
+								</div>
+								<div class="field half">
+									<label for="answer3">#{adminquiz.answer} 3</label>
+									<h:inputText id="answer3" required="true"
+										requiredMessage="#{adminquiz.answerRequiredMessage} 3"
+											validatorMessage="#{adminquiz.answerValidatorMessage}"
+										value="#{answerBB.answer.get(2).answer}">
+										<f:validateLength maximum="255" />
+									</h:inputText>
+								</div>
+								<div class="field half">
+									<label for="answer4">#{adminquiz.answer} 4</label>
+									<h:inputText id="answer4" required="true"
+										requiredMessage="#{adminquiz.answerRequiredMessage} 4"
+											validatorMessage="#{adminquiz.answerValidatorMessage}"
+										value="#{answerBB.answer.get(3).answer}">
+										<f:validateLength maximum="255" />
+									</h:inputText>
+								</div>
+								<div class="field">
+									<label for="correct">#{adminquiz.correctAnswer}</label>
+									<h:selectOneRadio id="correct" value="#{answerBB.correct}">
+										<f:selectItem itemLabel="#{adminquiz.answer} 1" itemValue="0" />
+										<f:selectItem itemLabel="#{adminquiz.answer} 2" itemValue="1" />
+										<f:selectItem itemLabel="#{adminquiz.answer} 3" itemValue="2" />
+										<f:selectItem itemLabel="#{adminquiz.answer} 4" itemValue="3" />
+									</h:selectOneRadio>
+								</div>
+								<div class="field">
+									<div class="row gtr-50 gtr-uniform">
+										<div class="col-12">
+											<p:commandButton value="#{adminquiz.add}" class="button fit primary"
+												update=":form:msgs form" action="#{answerBB.saveData()}">
+												<f:param name="qid" value="#{question.id}" />
+											</p:commandButton>
+										</div>
+									</div>
+								</div>
+							</div>
+						</h:form>
+					</div>
+				</div>
+			</section>
+		</div>
+	</ui:define>
+
+</ui:composition>
+</html>

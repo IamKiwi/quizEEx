@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<f:view locale="#{facesContext.externalContext.requestLocale}">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="title">quizEEx</ui:insert></title>
+	<h:outputStylesheet name="assets/css/main.css" library="template" />
+	<h:outputStylesheet name="assets/css/override.css" library="template" />
+</h:head>
+<h:body>
+	
+	<div id="wrapper">
+		<!-- Header -->
+		<ui:insert name="header">
+			<ui:include src="header.xhtml" />
+		</ui:insert>
+		
+		<!-- Menu -->
+		<ui:insert name="nav">
+			<ui:include src="nav.xhtml" />
+		</ui:insert>
+		
+		<!-- Banner -->
+		<ui:insert name="banner">
+			<ui:include src="banner.xhtml" />
+		</ui:insert>
+
+		<!-- Content -->
+		<ui:insert name="content"></ui:insert>
+
+		<!-- Scripts -->
+		<ui:insert name="scripts">
+			<ui:include src="scripts.xhtml" />
+		</ui:insert>
+		
+		<!-- Footer -->
+		<ui:insert name="footer">
+			<ui:include src="footer.xhtml" />
+		</ui:insert>
+	</div>
+</h:body>
+</f:view>
+</html>

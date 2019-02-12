@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../../partials/main.xhtml">
+	<ui:define name="banner"></ui:define>
+	<ui:define name="content">
+		<p:growl id="msgs" showDetail="false" closeable="true" life="2000" />
+		<div id="main">
+			<section>
+				<div class="inner">
+					<h3>
+						<h:outputText value="#{quiz.get(0).getName()}"></h:outputText>
+					</h3>
+					<hr />
+					<div class="inner">
+						<h:form style="margin-bottom:1em;" id="form">
+							<h3>
+								#{uq.question}
+								<h:outputText id="questionNo" value="#{userQuizBB.index + 1}">
+								</h:outputText>
+								#{uq.of}
+								<h:outputText id="noq" value="#{noq}">
+								</h:outputText>
+							</h3>
+
+							<h3>
+								<h:outputText id="questionLabel"
+									value="#{questions.get(userQuizBB.index).getQuestion()}">
+								</h:outputText>
+							</h3>
+							
+							<h:panelGroup rendered="#{userQuizBB.useranswers.size() > userQuizBB.index 
+										  			  and !userQuizBB.useranswers.get(userQuizBB.index).equals('')}">
+								<h3>
+									#{uq.prevActAnswer} <h:outputText value="#{userQuizBB.useranswers.get(userQuizBB.index)}" />
+								</h3>
+							</h:panelGroup>
+							
+							<div class="fields">
+								<div class="field">
+									<div class="col-12">
+										<h:selectOneRadio id="answer" layout="pageDirection"
+											value="#{userQuizBB.currentAnswer}">
+											<f:selectItems value="#{answers}" var="ans"
+												itemLabel="#{ans.answer}" itemValue="#{ans.answer}" />
+										</h:selectOneRadio>
+									</div>
+								</div>
+								<div class="field">
+									<h:panelGroup layout="block"
+										rendered="#{userQuizBB.index gt 0 and userQuizBB.index ne userQuizBB.numberOfQuestions - 1}">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-6">
+												<p:commandButton value="#{uq.prev}"
+													class="button fit primary"
+													update="questionLabel answer @form msgs questionNo"
+													action="#{userQuizBB.prevQuestion()}" />
+											</div>
+											<div class="col-6">
+												<p:commandButton value="#{uq.next}"
+													class="button fit primary"
+													update="questionLabel answer @form msgs questionNo"
+													action="#{userQuizBB.nextQuestion()}" />
+											</div>
+										</div>
+									</h:panelGroup>
+									<h:panelGroup layout="block"
+										rendered="#{userQuizBB.index eq 0 }">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-12">
+												<p:commandButton value="#{uq.next}"
+													class="button fit primary"
+													update="questionLabel answer @form msgs questionNo"
+													action="#{userQuizBB.nextQuestion()}" />
+											</div>
+										</div>
+									</h:panelGroup>
+									<h:panelGroup layout="block"
+										rendered="#{userQuizBB.index eq userQuizBB.numberOfQuestions - 1}">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-6">
+												<p:commandButton value="#{uq.prev}"
+													class="button fit primary"
+													update="questionLabel answer @form msgs questionNo"
+													action="#{userQuizBB.prevQuestion()}" />
+											</div>
+											<div class="col-6">
+												<p:commandButton value="#{uq.finish}" class="button fit primary"
+													update="questionLabel answer @form msgs questionNo"
+													action="#{userQuizBB.finish()}">
+													<f:param name="uid"
+														value="#{remoteClient.getDetails().getId()}" />
+												</p:commandButton>
+											</div>
+										</div>
+									</h:panelGroup>
+								</div>
+							</div>
+						</h:form>
+					</div>
+				</div>
+			</section>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

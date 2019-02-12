@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<header id="header" class="alt">
+		<h:form
+			rendered="#{!remoteClient.isAdmin() and !remoteClient.isUser()}">
+			<h:link outcome="/public/index" class="logo">Quiz<strong>EE</strong>x</h:link>
+		</h:form>
+		<h:form rendered="#{remoteClient.isAdmin()}">
+			<h:link outcome="/pages/admin/#{adminBB.adminHome()}" class="logo">Quiz<strong>EE</strong>x</h:link>
+		</h:form>
+		<h:form rendered="#{remoteClient.isUser()}">
+			<h:link outcome="/pages/user/#{userBB.userHome()}" class="logo">Quiz<strong>EE</strong>x</h:link>
+		</h:form>
+		<nav>
+			<a href="#menu">Menu</a>
+		</nav>
+	</header>
+</ui:composition>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../../partials/main.xhtml">
+	<ui:define name="banner"></ui:define>
+	<ui:define name="content">
+		<div id="main">
+			<section>
+				<div class="inner">
+					<h3>#{dash.userdash}</h3>
+					<h:outputText value="#{dash.welcome} #{remoteClient.getDetails().getName()}" />
+					<hr />
+					<div class="box alt">
+						<h:form>
+							<div class="row gtr-50 gtr-uniform">
+								<div class="col-6">
+									<span class="image fit"> <h:commandButton value="#{dash.quizzes}"
+											class="button fit large" action="#{userQuizBB.quizes()}" />
+									</span>
+								</div>
+								<div class="col-6">
+									<span class="image fit"> <h:commandButton value="#{dash.ranking}"
+											class="button fit large" action="#{userBB.hallOfFame()}" />
+									</span>
+								</div>
+								<div class="col-12">
+									<span class="image fit">
+										<h:commandButton class="button icon large fit fa-sign-out"
+											value="#{dash.logout}" action="#{loginBB.doLogout()}" />
+									</span>
+								</div>
+							</div>
+						</h:form>
+					</div>
+				</div>
+			</section>
+		</div>
+	</ui:define>
+
+</ui:composition>
+</html>

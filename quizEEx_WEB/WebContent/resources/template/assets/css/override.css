@@ -1,0 +1,16 @@
+.nice-margin
+{
+	margin-top: 20px;
+}
+
+table tbody tr:nth-child(2n+1) {
+	background-color: transparent !important;
+}
+
+table tbody tr {
+	border: none !important;
+}
+
+#banner {
+	background-image: url("#{resource['template:images/question_back.jpg']}") !important;
+}

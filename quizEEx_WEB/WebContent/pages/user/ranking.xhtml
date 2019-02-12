@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../../partials/main.xhtml">
+	<ui:define name="banner"></ui:define>
+	<ui:define name="content">
+		<div id="main">
+			<section>
+				<div class="inner">
+					<h3>#{dash.ranking}</h3>
+					<hr />
+					<div class="table-wrapper">
+						<h:form id="form-table" style="margin-bottom:1em;">
+							<p:dataTable value="#{userBB.users}" var="p" class="alt"
+								rows="5" paginator="true" lazy="true"
+								paginatorTemplate="{CurrentPageReport} {PageLinks}"
+								rowsPerPageTemplate="5,10,15">
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{reg.name}" />
+									</f:facet>
+									<h:outputText value="#{p.name}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{reg.surname}" />
+									</f:facet>
+									<h:outputText value="#{p.surname}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{uq.points2}" />
+									</f:facet>
+									<h:outputText value="#{p.points}" />
+								</p:column>
+							</p:dataTable>
+						</h:form>
+					</div>
+					<hr />
+					<div class="box alt">
+						<div class="row gtr-50 gtr-uniform">
+							<div class="col-12">
+								<span class="image fit"> <a href="dashboard.xhtml"
+									class="button icon small fit primary fa-arrow-left">#{uselect.backToUserPanel}</a>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</ui:define>
+
+</ui:composition>
+</html>

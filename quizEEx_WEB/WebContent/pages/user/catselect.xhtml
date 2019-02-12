@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../../partials/main.xhtml">
+	<ui:define name="banner"></ui:define>
+	<ui:define name="content">
+		<div id="main">
+			<section>
+				<div class="inner">
+					<h3>#{uselect.catselect}</h3>
+					<div class="inner">
+						<hr />
+						<h:form id="form">
+							<p:growl id="msgs" showDetail="false" closeable="true"
+								life="2000" />
+						</h:form>
+						<h:form>
+							<div class="box alt">
+								<div class="row gtr-50 gtr-uniform">
+									<ui:repeat var="someVar" value="#{cat}">
+										<div class="col-6">
+											<span class="image fit"> <h:commandButton
+													class="button icon large fit" value="#{someVar}"
+													action="#{userQuizBB.getQuizesByCategory(someVar)}" />
+											</span>
+										</div>
+									</ui:repeat>
+									<div class="col-12">
+										<span class="image fit"> <a href="dashboard.xhtml"
+											class="button icon fit primary fa-arrow-left">
+																#{uselect.backToUserPanel}</a>
+										</span>
+									</div>
+								</div>
+							</div>
+						</h:form>
+					</div>
+				</div>
+			</section>
+		</div>
+	</ui:define>
+
+</ui:composition>
+</html>

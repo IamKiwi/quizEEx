@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../partials/main.xhtml">
+	<ui:define name="banner">
+
+	</ui:define>
+
+	<ui:define name="content">
+		<div id="main">
+			<section id="two">
+				<div class="inner">
+					<header class="major">
+						<h2>#{login.login}</h2>
+					</header>
+					<p>#{login.loginInfo}</p>
+				</div>
+			</section>
+			<section>
+				<div class="inner">
+					<section>
+						<h2><h:outputLabel value="#{flash['registerSuccessful']}"/></h2>
+						<p:messages id="msg" showDetail="false" closable="true">
+							<p:autoUpdate />
+						</p:messages>
+						
+						<h:form>
+							<div class="fields">
+								<div class="field">
+									<label for="email">#{login.email}</label>
+									<h:inputText id="login" value="#{loginBB.login}"
+										required="true" requiredMessage="#{login.emailRequiredMessage}" validatorMessage="#{login.emailValidatorMessage}">
+										<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+									</h:inputText>
+								</div>
+								<div class="field">
+									<label for="password">#{login.password}</label>
+									<h:inputSecret id="pass" value="#{loginBB.pass}"
+										required="true" requiredMessage="#{login.passwordRequiredMessage}" />
+								</div>
+							</div>
+							<div class="field half">
+								<p:commandButton value="#{login.login}" action="#{loginBB.doLogin()}"
+									update="msg" class="primary fit" />
+							</div>
+						</h:form>
+					</section>
+				</div>
+			</section>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

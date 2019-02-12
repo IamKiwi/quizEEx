@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../../partials/main.xhtml">
+	<ui:define name="banner"></ui:define>
+	<ui:define name="content">
+		<p:growl id="msgs" showDetail="false" closeable="true" life="2000" />
+		<div id="main">
+			<section>
+				<div class="inner">
+					<h2>#{uq.summary}</h2>
+					<hr />
+					<h3><h:outputText value="#{uq.earned} #{yourPoints} #{uq.of} #{maxPoints} #{uq.points} #{uq.pointsInfo}." /></h3>
+					<hr />
+					<div class="inner">
+						<h:form>
+							<div class="row gtr-50 gtr-uniform">
+								<table style="width: 100%">
+									<tr style="text-align: center;">
+										<td><h5>#{uq.question}</h5></td>
+										<ui:repeat var="o" value="#{questions}">
+											<td><h5><h:outputText value="#{o.question}"></h:outputText></h5></td>
+										</ui:repeat>
+									</tr>
+									<tr style="text-align: center;">
+										<td><h5>#{uq.yourAnswer}</h5></td>
+										<ui:repeat var="o" value="#{ua}">
+											<td><h:outputText value="#{o}"></h:outputText></td>
+										</ui:repeat>
+									</tr>
+									<tr style="text-align: center;">
+										<td><h5>#{uq.correctAnswer}</h5></td>
+										<ui:repeat var="o" value="#{ca}">
+											<td><h:outputText value="#{o.answer}"></h:outputText></td>
+										</ui:repeat>
+									</tr>
+								</table>
+
+								<h:panelGroup layout="block">
+									<div class="col-6">
+										<span class="image fit"> <a href="dashboard.xhtml"
+											class="button icon fit primary fa-arrow-left">
+											#{uselect.backToUserPanel}</a>
+										</span>
+									</div>
+									<div class="col-6">
+										<span class="image fit"> <h:commandButton
+												value="#{uq.tryAgain}" class="button fit primary"
+												action="#{userQuizBB.tryAgain()}" />
+										</span>
+									</div>
+								</h:panelGroup>
+
+							</div>
+						</h:form>
+					</div>
+				</div>
+			</section>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

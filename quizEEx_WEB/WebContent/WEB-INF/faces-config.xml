@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+	version="2.1">
+
+	<application>
+		<resource-bundle>
+			<base-name>resources.welcome</base-name>
+			<var>welcome</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>resources.nav</base-name>
+			<var>nav</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>resources.register</base-name>
+			<var>reg</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>resources.login</base-name>
+			<var>login</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>resources.dash</base-name>
+			<var>dash</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>resources.userselect</base-name>
+			<var>uselect</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>resources.userquiz</base-name>
+			<var>uq</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>resources.adminquiz</base-name>
+			<var>adminquiz</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>resources.adminbean</base-name>
+			<var>adminbean</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>resources.regbean</base-name>
+			<var>regbean</var>
+		</resource-bundle>
+		<locale-config>
+			<default-locale>pl</default-locale>
+		</locale-config>
+	</application>
+</faces-config>

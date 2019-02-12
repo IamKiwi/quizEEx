@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<f:view locale="#{facesContext.externalContext.requestLocale}">
+<ui:composition template="../../partials/main.xhtml">
+	<ui:define name="banner"></ui:define>
+	<ui:define name="content">
+		<div id="main">
+			<section>
+				<div class="inner">
+					<h2><h:outputLabel value="#{flash['updateSuccess']}"/></h2>
+					
+					<h3>#{dash.users}</h3>
+					<hr />
+					<div class="table-wrapper">
+						<h:form id="form-table" style="margin-bottom:1em;">
+							<p:dataTable value="#{adminBB.users}" var="p"
+								class="alt" rows="5" paginator="true" lazy="true"
+								paginatorTemplate="{CurrentPageReport} {PageLinks}"
+								rowsPerPageTemplate="5,10,15">
+								<p:column priority="5" style="width: 30%">
+									<f:facet name="header">
+										<h:outputText value="Email" />
+									</f:facet>
+									<h:outputText value="#{p.email}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{dash.name}" />
+									</f:facet>
+									<h:outputText value="#{p.name}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{dash.surname}" />
+									</f:facet>
+									<h:outputText value="#{p.surname}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{dash.role}" />
+									</f:facet>
+									<h:outputText value="#{p.role}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{dash.accstatus}" />
+									</f:facet>
+									<h:outputText value="#{dash.active}" rendered="#{p.active}" />
+									<h:outputText value="#{dash.inactive}" rendered="#{!p.active}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{dash.edit}" />
+									</f:facet>
+									<p:commandButton value="#{dash.edit}" class="button fit small" action="#{adminBB.editUser(p)}"/>
+								</p:column>
+								<p:column>
+									<f:facet name="header">
+										<h:outputText value="#{dash.deactivation}" />
+									</f:facet>
+									<p:commandButton value="#{dash.deactivate}" class="button fit small" action="#{adminBB.deactivateUser(p)}" 
+													 rendered="#{p.active and p.role ne 'admin'}" update="@form"/>
+									<p:commandButton value="#{dash.activate}" class="button fit small" action="#{adminBB.activateUser(p)}" 
+													 rendered="#{!p.active}" update="@form"/>
+								</p:column>
+							</p:dataTable>
+						</h:form>
+					</div>
+					<hr />
+					<div class="box alt">
+						<div class="row gtr-50 gtr-uniform">
+							<div class="col-12">
+								<span class="image fit"> <a href="dashboard.xhtml"
+									class="button icon small fit primary fa-arrow-left">#{dash.backToAdminPanel}</a>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</ui:define>
+
+</ui:composition>
+</f:view>
+</html>

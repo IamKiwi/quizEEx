@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<f:view locale="#{facesContext.externalContext.requestLocale}">
+
+<ui:composition template="../partials/main.xhtml">
+	<ui:define name="content">
+		<div id="main">
+			<section id="two">
+				<div class="inner">
+					<header class="major" id="whatis">
+						<h2>#{welcome.whatis}</h2>
+					</header>
+					<p>#{welcome.desc}</p>
+					<ul class="actions">
+						<li><a href="/quizEEx/public/register.xhtml" class="button next">#{welcome.register}</a></li>
+					</ul>
+				</div>
+			</section>
+		</div>
+	</ui:define>
+</ui:composition>
+</f:view>
+</html>

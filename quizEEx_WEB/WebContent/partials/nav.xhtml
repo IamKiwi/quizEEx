@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+		<nav id="menu">
+			<h:form rendered="#{!remoteClient.isAdmin() and !remoteClient.isUser()}">
+			<ul class="links">
+				<li><h:link value="#{nav.homepage}" outcome="/public/index"/></li>
+				<li><h:link value="#{nav.register}" outcome="/public/#{pagesBB.register()}"/></li>
+				<li><h:link value="#{nav.login}" outcome="/pages/#{pagesBB.login()}" /></li>
+			</ul>
+			</h:form>
+			<h:form rendered="#{remoteClient.isAdmin()}">
+				<ul class="links">
+					<li><h:link value="#{nav.adminPanel}" outcome="/pages/admin/#{adminBB.adminHome()}" /></li>
+					<li><h:link value="#{nav.users}" outcome="/pages/admin/#{adminBB.adminUsers()}" /></li>
+					<li><h:link value="#{nav.quizzes}" outcome="/pages/admin/#{adminBB.adminQuizes()}" /></li>
+					<li><h:commandLink value="#{nav.logout}" action="#{loginBB.doLogout()}" /></li>
+				</ul>
+			</h:form>
+			<h:form rendered="#{remoteClient.isUser()}">
+				<ul class="links">
+					<li><h:link value="#{nav.homepage}" outcome="/pages/user/#{userBB.userHome()}" /></li>
+					<li><h:link value="#{nav.quizzes}" outcome="/pages/user/#{userBB.catSelect()}" /></li>
+					<li><h:link value="#{nav.ranking}" outcome="/pages/user/#{userBB.ranking()}" /></li>
+					<li><h:commandLink value="#{nav.logout}" action="#{loginBB.doLogout()}" /></li>
+				</ul>
+			</h:form>
+		</nav>
+</ui:composition>
